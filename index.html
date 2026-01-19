@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apertura portone</title>
+</head>
+<body>
+  <h3>Sto aprendo il portone…</h3>
+
+  <script>
+    const SERVER_URI = "https://shelly-234-eu.shelly.cloud";
+    const AUTH_KEY   = "M2MyYzlkdWlk31BD5EF51539AF8EE7F0F0EB878D2D73D8A9BA8A66B6404842BF1A3A7B2155DD4B7F57BAD462D6B9";
+    const DEVICE_ID  = "b0a7324b7278";
+
+    fetch(`${SERVER_URI}/device/relay/control`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        id: DEVICE_ID,
+        auth_key: AUTH_KEY,
+        channel: "0",
+        turn: "on"
+      })
+    })
+    .then(() => {
+      document.body.innerHTML = "<h2>✅ Door opened</h2><p>Welcome to Roma from Key&Stay!.</p>";
+    })
+    .catch(() => {
+      document.body.innerHTML = "<h2>❌ Errore</h2><p>Riprova.</p>";
+    });
+  </script>
+</body>
+</html>
